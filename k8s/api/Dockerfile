@@ -1,4 +1,9 @@
-FROM python:3.13-slim
+FROM python:3.11.2-bullseye
 
-# TODO: implémenter le Dockerfile de l'API, vous pouvez vous inspirer de ce qui est fait pour les autres projets
-# (et vous référer au cours)
+RUN mkdir /opt/app-root
+
+WORKDIR /opt/app-root
+
+RUN echo "import platform\nprint(\"Coucou ! On tourne sur \" + platform.platform())" > myscript.py
+
+ENTRYPOINT ["python", "myscript.py"]

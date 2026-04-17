@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: titanic-api
-          image: quay.io/kto_gthomas/titanic/api:latest
+          image: quay.io/gwenaelpetit/titanic/api:latest
           env:
             - name: OAUTH2_DOMAIN
               value: "PLACEHOLDER_OAUTH2_DOMAIN"

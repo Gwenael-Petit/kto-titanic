@@ -1,9 +1,13 @@
-FROM python:3.11.2-bullseye
+FROM python:3.13-slim
 
-RUN mkdir /opt/app-root
+WORKDIR /app
 
-WORKDIR /opt/app-root
+RUN pip install --no-cache-dir uv
+COPY pyproject.toml uv.lock .python-version ./
+COPY ./src/titanic/api ./src/titanic/api
 
-RUN echo "import platform\nprint(\"Coucou ! On tourne sur \" + platform.platform())" > myscript.py
+RUN uv sync -n --group api
 
-ENTRYPOINT ["python", "myscript.py"]
+EXPOSE 8080
+
+ENTRYPOINT ["uv", "-n", "run", "--no-sync", "api"]
